@@ -56,7 +56,7 @@ if st.button("Generate Lyrics"):
 
         # Display the generated lyric
         st.success(f"Generated Lyric:\n{generated_lyric}")
-         st.success(f"Translated Lyric (Hindi):\n{translated_lyric}")
+        st.success(f"Translated Lyric (Hindi):\n{translated_lyric}")
 
         # Ask for user feedback
         user_feedback = st.selectbox("How satisfied are you with the generated lyric?", ["Satisfied", "Neutral", "Dissatisfied"])
