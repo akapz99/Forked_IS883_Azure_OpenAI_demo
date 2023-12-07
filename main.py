@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import openai
 import os
+from deep_translator import GoogleTranslator
 
 # Set up the OpenAI API key
 openai.api_key = os.environ.get('OPENAI_API_KEY')
@@ -25,6 +26,12 @@ def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.
     generated_lyric = response['choices'][0]['text']
     return generated_lyric
 
+# Function to translate text from English to Hindi
+def translate_to_hindi(text):
+    translator = GoogleTranslator()
+    translation = translator.translate(text, dest='hi')
+    return translation.text
+    
 # Streamlit app
 st.title("Lyric Generator Chatbot")
 
@@ -35,15 +42,21 @@ subject = st.text_input("Subject (Optional):", "Enter the subject for this parti
 rhyme = st.text_input("Rhyme (Optional):", "Enter a particular word or phrase that you would like used")
 temperature = st.slider("Select temperature", 0.1, 1.0, 0.7, 0.1)
 use_slang = st.checkbox("Allow Slang in Lyrics", value=False, key='slang_checkbox', help='Use slang and casual language in the lyrics.')
+# Toggle button for translation
+translate_toggle = st.checkbox("Translate to Hindi", value=False, key='translate_toggle', help='Toggle to translate the generated lyric to Hindi.')
 
 # Generate lyrics when the user clicks the button
 if st.button("Generate Lyrics"):
     if artist_name and genre:
         # Call the generate_lyrics function
         generated_lyric = generate_lyrics(artist_name, genre, subject, rhyme, temperature, use_slang)
+        
+        # Translate the generated lyric to Hindi if the toggle is on
+        translated_lyric = translate_to_hindi(generated_lyric) if translate_toggle else generated_lyric
 
         # Display the generated lyric
         st.success(f"Generated Lyric:\n{generated_lyric}")
+         st.success(f"Translated Lyric (Hindi):\n{translated_lyric}")
 
         # Ask for user feedback
         user_feedback = st.selectbox("How satisfied are you with the generated lyric?", ["Satisfied", "Neutral", "Dissatisfied"])
