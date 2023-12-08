@@ -8,7 +8,7 @@ openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 # Function to generate lyrics with rhyming translations
 def generate_rhyming_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.7, use_slang=False):
-    original_prompt = f"Imagine you are a songwriter. Write the lyrics to a song based on this {genre} that the author wants: {subject}, in similarity to this artist: {artist_name}, and if available create rhymes with this phrase {rhyme}. Try your best to match the style of the artist. Unless specified, do not use slang or casual language in the lyrics generated."
+    original_prompt = f"Imagine you are a songwriter. Write the lyrics to a song based on this {genre} that the author wants: {subject}, in similarity to this artist: {artist_name}, and if available create rhymes with this phrase {rhyme}. Try your best to match the style of the artist. Unless specified, do not use slang or casual language in the lyrics generated. Also, unless specified do not translate the lyrics to another language."
 
     # Modify the prompt based on the use_slang parameter
     if use_slang:
