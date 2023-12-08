@@ -7,8 +7,8 @@ from deep_translator import GoogleTranslator
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 # Function to generate lyrics with rhyming translations
-def generate_rhyming_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.7, use_slang=False):
-    original_prompt = f"Imagine you are a songwriter. Write the lyrics to a song based on this {genre} that the author wants: {subject}, in similarity to this artist: {artist_name}, and if available create rhymes with this phrase {rhyme}. Try your best to match the style of the artist. Unless specified, do not use slang or casual language in the lyrics generated. Also, unless specified do not translate the lyrics to another language."
+def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.7, use_slang=False):
+    prompt = f"Imagine you are a songwriter. Write the lyrics to a song based on this {genre} that the author wants: {subject}, in similarity to this artist: {artist_name}, and if available create rhymes with this phrase {rhyme}. Try your best to match the style of the artist. Unless specified, do not use slang or casual language in the lyrics generated. Also, unless specified do not translate the lyrics to another language."
 
     # Modify the prompt based on the use_slang parameter
     if use_slang:
@@ -17,14 +17,17 @@ def generate_rhyming_lyrics(artist_name, genre, subject=None, rhyme=None, temper
     # Generate rhyming translations using OpenAI GPT-3
     translated_prompt = f"Translate the following lines into rhyming Hindi:\n"
     translated_prompt += f'"{original_prompt}"'
-
+    
+    # Generate lyrics using OpenAI GPT-3
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=translated_prompt,
         max_tokens=200,
         temperature=temperature,
     )
-
+    generated_lyric = response['choices'][0]['text']
+    return generated_lyric
+    
     translated_lyric = response['choices'][0]['text']
     return translated_lyric
 
@@ -32,7 +35,13 @@ def generate_rhyming_lyrics(artist_name, genre, subject=None, rhyme=None, temper
 def translate_to_hindi(text):
     translator = GoogleTranslator(source='auto', target='hindi')
     translation = translator.translate(text)
-    return translation
+    # Generate rhyming translations using OpenAI GPT-3
+    translated_prompt = f"Translate the following lines into rhyming Hindi:\n"
+    translated_prompt += f'"{original_prompt}"'
+    #return translation
+
+    translated_lyric = response['choices'][0]['text']
+    return translated_lyric
 
 # Streamlit app
 st.title("Lyric Generator Chatbot")
@@ -41,13 +50,13 @@ st.title("Lyric Generator Chatbot")
 artist_name = st.text_input("Enter the artist's name:")
 genre = st.text_input("Enter the genre:")
 subject = st.text_input("Subject (Optional):", "Enter the subject for this particular song")
-rhyme = st.text_input("Rhyme (Optional):", "Enter a particular word or phrase that you would like used")
+rhyme = st.text_input("Rhyme (Optional):", "Enter a particular word or phrase that you would like to rhyme with")
 temperature = st.slider("Select temperature", 0.1, 1.0, 0.7, 0.1)
 use_slang = st.checkbox("Allow Slang in Lyrics", value=False, key='slang_checkbox', help='Use slang and casual language in the lyrics.')
 translate_hindi = st.checkbox("Translate to Hindi", value=False, help="Check this box if you want to translate the lyrics to Hindi.")
 
-# Generate rhyming lyrics when the user clicks the button
-if st.button("Generate Rhyming Lyrics"):
+# Generate lyrics when the user clicks the button
+if st.button("Generate Lyrics"):
     if artist_name and genre:
         # Call the generate_rhyming_lyrics function
         generated_lyric = generate_rhyming_lyrics(artist_name, genre, subject, rhyme, temperature, use_slang)
