@@ -27,8 +27,8 @@ def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.
 
 
 # Function to translate text to the selected language and add rhyming translations
-def translate_and_rhyme(text, language, rhyme, temperature=0.7):
-    translation_prompt = f"Translate the following lines into rhyming {language}:\n"
+def translate_and_rhyme(text, language, rhyme, temperature=0.7): 
+    translation_prompt = f"I want you to act as a translator and songwriter, and create a cover version of the {generated_lyric} in {language}. The cover version should match the style and structure of the {generated_lyric}. Every section of the {generated_lyric} should be translated. The translation should be in the script, and use the alphabet of the {language}. Your objective is to seamlessly blend the linguistic and artistic elements to produce a cover that resonates authentically with the spirit of the original.:\n"
     translation_prompt += f'"{text}"'
 
     response = openai.Completion.create(
