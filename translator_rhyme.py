@@ -8,7 +8,7 @@ openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 # Function to generate lyrics
 def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.7, use_slang=False):
-    prompt = f"Imagine you are a songwriter. Write the lyrics to a song based on this {genre} that the author wants: {subject}, in similarity to this artist: {artist_name}, and if available create rhymes with this phrase {rhyme}. Try your best to match the style of the artist. Unless specified, do not use slang or casual language in the lyrics generated."
+    prompt = f"Imagine you are a songwriter. Write the lyrics to a song based on this {genre} that the author wants: {subject}, in similarity to this artist: {artist_name}, and if available create rhymes with this phrase {rhyme}. Every {generated_lyric} should have at least 2 verses, 1 chorus and 1 bridge. The {generated_lyric} should follow the structure of Verse 1, Chorus, Verse 2, Chorus, Bridge, Chorus. Try your best to match the style of the artist. Unless specified, do not use slang or casual language in the lyrics generated."
 
     # Modify the prompt based on the use_slang parameter
     if use_slang:
@@ -18,7 +18,7 @@ def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
-        max_tokens=200,
+        max_tokens=1000,
         temperature=temperature,
     )
 
