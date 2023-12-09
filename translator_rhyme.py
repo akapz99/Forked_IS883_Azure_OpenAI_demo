@@ -36,12 +36,12 @@ def translate_to_hindi(text):
     translator = GoogleTranslator(source='auto', target='hindi')
     translation = translator.translate(text)
     # Generate rhyming translations using OpenAI GPT-3
-    translated_prompt = f"Translate the following lines into rhyming Hindi:\n"
-    translated_prompt += f'"{original_prompt}"'
-    #return translation
+    #translated_prompt = f"Translate the following lines into rhyming Hindi:\n"
+    #translated_prompt += f'"{original_prompt}"'
+    return translation
 
-    translated_lyric = response['choices'][0]['text']
-    return translated_lyric
+    #translated_lyric = response['choices'][0]['text']
+    #return translated_lyric
 
 # Streamlit app
 st.title("Lyric Generator Chatbot")
