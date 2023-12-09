@@ -33,7 +33,7 @@ subject = st.text_input("Subject (Optional):", "Enter the subject for this parti
 rhyme = st.text_input("Rhyme (Optional):", "Enter a particular word or phrase that you would like used")
 temperature = st.slider("Select how much personal (random) input you would like from me (the AI)", 0.1, 1.0, 0.7, 0.1)
 use_slang = st.checkbox("Allow Slang in Lyrics", value=False, key='slang_checkbox', help='Use slang and casual language in the lyrics.')
-selected_language = st.selectbox("Select Language", ["English", "Hindi", "French", "Arabic", "German", "Italian", "Spanish"])
+selected_language = st.selectbox("Select Language", ["Fante", "Hindi", "French", "Arabic", "German", "Italian", "Spanish"])
 translate_selected_language = st.checkbox(f"Translate to {selected_language}", value=False, help=f"Check this box if you want to translate the lyrics to {selected_language}.")
 
 # Generate lyrics when the user clicks the button
