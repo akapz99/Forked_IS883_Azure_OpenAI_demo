@@ -49,7 +49,7 @@ artist_name = st.text_input("Enter the artist's name:")
 genre = st.text_input("Enter the genre:")
 subject = st.text_input("Subject (Optional):", "Enter the subject for this particular song")
 rhyme = st.text_input("Rhyme (Optional):", "Enter a particular word or phrase that you would like used")
-temperature = st.slider("Select temperature", 0.1, 1.0, 0.7, 0.1)
+temperature = st.slider("Select how much personal (random) input you would like from me (the AI)", 0.1, 1.0, 0.7, 0.1)
 use_slang = st.checkbox("Allow Slang in Lyrics", value=False, key='slang_checkbox', help='Use slang and casual language in the lyrics.')
 translate_hindi = st.checkbox("Translate to Hindi", value=False, help="Check this box if you want to translate the lyrics to Hindi.")
 
