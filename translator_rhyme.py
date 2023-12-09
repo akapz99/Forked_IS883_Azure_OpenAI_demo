@@ -59,7 +59,7 @@ translate_hindi = st.checkbox("Translate to Hindi", value=False, help="Check thi
 if st.button("Generate Lyrics"):
     if artist_name and genre:
         # Call the generate_rhyming_lyrics function
-        generated_lyric = generate_rhyming_lyrics(artist_name, genre, subject, rhyme, temperature, use_slang)
+        generated_lyric = generate_lyrics(artist_name, genre, subject, rhyme, temperature, use_slang)
 
         # Display the generated rhyming lyric
         st.success(f"Generated Rhyming Lyrics:\n{generated_lyric}")
