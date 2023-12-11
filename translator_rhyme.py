@@ -75,3 +75,5 @@ if st.button("Generate Lyrics"):
         if user_feedback == "Dissatisfied":
             st.info("Thank you for your feedback! We will use this to improve our lyric generation.")
 
+
+st.write("API Response:", response)
