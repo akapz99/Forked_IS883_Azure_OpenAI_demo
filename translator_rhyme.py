@@ -34,7 +34,7 @@ def translate_and_rhyme(text, language, rhyme, temperature=0.7):
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=translation_prompt,
-        max_tokens=200,
+        max_tokens=2000,
         temperature=temperature,
     )
 
@@ -76,4 +76,3 @@ if st.button("Generate Lyrics"):
             st.info("Thank you for your feedback! We will use this to improve our lyric generation.")
 
 
-st.write("API Response:", response)
