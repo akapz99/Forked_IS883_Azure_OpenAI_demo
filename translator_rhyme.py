@@ -8,7 +8,7 @@ openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 # Function to generate lyrics
 def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.7, use_slang=False):
-    prompt = f"Imagine you are a songwriter. Write the lyrics to a song based on this {genre} that the author wants: {subject}, in similarity to this artist: {artist_name}, and if available create rhymes with this phrase {rhyme}. Every song should have at least 2 verses, 1 chorus and 1 bridge. The song should follow the structure of Verse 1, Chorus, Verse 2, Chorus, Bridge, Chorus. Always add a paragraph break between every sentence.. Try your best to match the style of the artist. Unless specified, do not use slang or casual language in the lyrics generated."
+    prompt = f"Imagine you are a songwriter. Write the lyrics to a song based on this {genre} that the author wants: {subject}, in similarity to this artist: {artist_name}, and if available create rhymes with this phrase {rhyme}. Every song should have at least 2 verses, 1 chorus and 1 bridge. The song should follow the structure of Verse 1, Chorus, Verse 2, Chorus, Bridge, Chorus.  Add a paragraph break after each comma. Try your best to match the style of the artist. Unless specified, do not use slang or casual language in the lyrics generated."
 
     # Modify the prompt based on the use_slang parameter
     if use_slang:
@@ -28,7 +28,7 @@ def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.
 
 # Function to translate text to the selected language and add rhyming translations
 def translate_and_rhyme(text, language, rhyme, temperature=0.7): 
-    translation_prompt = f"I want you to act as a translator and songwriter, and create a cover version of the {generated_lyric} in {language}. The cover version should match the style and structure of the {generated_lyric}. Every section of the {generated_lyric} should be translated. The translation should follow the structure of Verse 1, Chorus, Verse 2, Chorus, Bridge, Chorus. The translation should be in the script, and use the alphabet of the {language}. Always add a paragraph break between every sentence. Your objective is to seamlessly blend the linguistic and artistic elements to produce a cover that resonates authentically with the spirit of the original.:\n"
+    translation_prompt = f"I want you to act as a translator and songwriter, and create a cover version of the {generated_lyric} in {language}. The cover version should match the style and structure of the {generated_lyric}. Every section of the {generated_lyric} should be translated. The translation should follow the structure of Verse 1, Chorus, Verse 2, Chorus, Bridge, Chorus. The translation should be in the script, and use the alphabet of the {language}. Add a paragraph break after each comma. Your objective is to seamlessly blend the linguistic and artistic elements to produce a cover that resonates authentically with the spirit of the original.:\n"
     translation_prompt += f'"{text}"'
 
     response = openai.Completion.create(
